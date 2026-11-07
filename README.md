@@ -39,6 +39,16 @@ Version 0.1.1 is the first public release: read-only and audit foundation, the p
 | `monitor` | "set up monitoring", "alerts" | Yes, gated |
 | `report` | "client report", "post-mortem" | No |
 
+## Usage
+
+Ask the agent in plain language:
+
+- "Audit this WordPress site and give me a prioritized report."
+- "The site redirects mobile visitors to spam. Preserve evidence and contain it."
+- "Harden this site, set up alerts, then verify checkout and forms."
+
+The skill chooses a mode, states what it cannot check and returns the same 7-part output contract.
+
 ## Install
 
 ```bash

@@ -117,7 +117,7 @@ def check_dashes(path: Path) -> None:
 
 def iter_project_text_files() -> list[Path]:
     paths: list[Path] = []
-    roots = [skill_dir, root / "tests", root / ".claude-plugin", root / ".cursor-plugin", root / ".github"]
+    roots = [skill_dir, root / "docs", root / "tests", root / ".claude-plugin", root / ".cursor-plugin", root / ".github"]
     for base in roots:
         if not base.exists():
             continue
@@ -348,6 +348,11 @@ def main() -> int:
     for path in text_files:
         check_encoding(path)
         check_dashes(path)
+
+    for name in ("README.md", "README.ru.md"):
+        readme = root / name
+        if readme.is_file():
+            check_links(readme)
 
     if skill_dir.exists():
         check_skill()
