@@ -950,7 +950,7 @@ Script-specific design:
 | `user-audit.php` | Roles, capabilities, sessions, 2FA | read | Pseudonymize in output |
 | `cron-audit.php` | Cron hooks and args | read | Respect `bbcs_ability_expose_cron_args` |
 | `hash-evidence.php` | SHA-256 manifest | read | Cross-platform primary |
-| `hash-evidence.sh` | POSIX fallback | read | Same manifest format |
+| `hash-evidence.sh` | Bash fallback | read | Same manifest format |
 | `parse-botblocker-log.php` | Normalize server/BotBlocker logs | read | Local files only |
 | `build-timeline.php` | Merge events into CSV/JSON | read | Deduplicate, keep source |
 | `lib/redact.php` | Shared redaction | none | Passwords, tokens, IP, email |

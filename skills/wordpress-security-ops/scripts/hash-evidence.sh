@@ -1,5 +1,5 @@
-#!/bin/sh
-# POSIX fallback for hash-evidence.php.
+#!/usr/bin/env bash
+# Bash fallback for hash-evidence.php.
 #
 # Outputs JSON Lines, one file per line. Use hash-evidence.php for the
 # schema-compliant manifest object.

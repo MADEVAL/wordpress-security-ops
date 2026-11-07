@@ -4,6 +4,12 @@ All notable changes to this project are documented here.
 
 The format is based on Keep a Changelog, and this project adheres to Semantic Versioning.
 
+## [0.1.1] - 2026-11-08
+
+### Fixed
+
+- `hash-evidence.sh` uses a bash shebang, so shellcheck no longer reports SC3045 and CI passes.
+
 ## [0.1.0] - 2026-11-08
 
 ### Added

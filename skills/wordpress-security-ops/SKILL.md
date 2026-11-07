@@ -5,7 +5,7 @@ license: MIT
 compatibility: "WordPress 5.9-7.1, PHP 7.4-8.5, BotBlocker Security 1.7.10+ (48 abilities in the current source tree; the unpublished build may report 60; probe the live surface), optional MCP Adapter 0.7.1+ and WP-CLI 2.x."
 metadata:
   author: Yevhen Leonidov
-  version: "0.1.0"
+  version: "0.1.1"
   languages: [en, ru]
   modes: 7
   repository: "https://github.com/MADEVAL/wordpress-security-ops"
@@ -233,7 +233,7 @@ Use `findings.schema.json` for machine-readable output. Never put secrets or raw
 | `scripts/user-audit.php` | Users, roles, sessions, 2FA summary |
 | `scripts/cron-audit.php` | Cron hooks and redacted args |
 | `scripts/hash-evidence.php` | SHA-256 evidence manifest |
-| `scripts/hash-evidence.sh` | POSIX evidence hash fallback |
+| `scripts/hash-evidence.sh` | Bash evidence hash fallback |
 | `scripts/integrity-check.php` | Checksum and manifest comparison |
 | `scripts/build-timeline.php` | Merge ability, log and database events into a UTC timeline |
 | `scripts/malware-scan.php` | Heuristic file scan without the addon |

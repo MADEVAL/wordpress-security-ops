@@ -1,6 +1,6 @@
 # WordPress Security Ops
 
-![Version](https://img.shields.io/badge/version-0.1.0-blue)
+![Version](https://img.shields.io/badge/version-0.1.1-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![CI](https://github.com/MADEVAL/wordpress-security-ops/actions/workflows/ci.yml/badge.svg)
 
@@ -14,7 +14,7 @@ It uses BotBlocker Security as the control plane when the site has it, with REST
 
 ## Status
 
-Version 0.1.0 is the initial read-only and audit foundation. Write flows are added incrementally behind backup, dry-run, approval and post-check gates.
+Version 0.1.1 is the first public release: read-only and audit foundation, the plugin-free path and safe write helpers. Write flows are added incrementally behind backup, dry-run, approval and post-check gates.
 
 ## What It Covers
 

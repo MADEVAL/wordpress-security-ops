@@ -1,6 +1,6 @@
 # WordPress Security Ops
 
-![Версия](https://img.shields.io/badge/version-0.1.0-blue)
+![Версия](https://img.shields.io/badge/version-0.1.1-blue)
 ![Лицензия](https://img.shields.io/badge/license-MIT-green)
 ![CI](https://github.com/MADEVAL/wordpress-security-ops/actions/workflows/ci.yml/badge.svg)
 
@@ -14,7 +14,7 @@
 
 ## Статус
 
-Версия 0.1.0 - базовый read-only и audit-слой. Write-сценарии добавляются постепенно, только через backup, dry-run, подтверждение человека и post-check.
+Версия 0.1.1 - первый публичный релиз: базовый read-only и audit-слой, путь без BotBlocker и безопасные write-хелперы. Write-сценарии добавляются постепенно, только через backup, dry-run, подтверждение человека и post-check.
 
 ## Что покрывает
 
