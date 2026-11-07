@@ -1,0 +1,17 @@
+{
+  "name": "wordpress-security-ops",
+  "owner": {
+    "name": "MADEVAL",
+    "url": "https://github.com/MADEVAL"
+  },
+  "plugins": [
+    {
+      "name": "wordpress-security-ops",
+      "source": "./",
+      "description": "Audit, harden, investigate and repair hacked WordPress sites with or without BotBlocker Security.",
+      "version": "0.1.0",
+      "homepage": "https://github.com/MADEVAL/wordpress-security-ops",
+      "repository": "https://github.com/MADEVAL/wordpress-security-ops"
+    }
+  ]
+}

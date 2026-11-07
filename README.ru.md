@@ -1,0 +1,108 @@
+# WordPress Security Ops
+
+![Версия](https://img.shields.io/badge/version-0.1.0-blue)
+![Лицензия](https://img.shields.io/badge/license-MIT-green)
+![CI](https://github.com/MADEVAL/wordpress-security-ops/actions/workflows/ci.yml/badge.svg)
+
+Операционный скил безопасности WordPress: аудит, защита, разбор инцидента и лечение взломанного сайта.
+
+`wordpress-security-ops` - не очередной чек-лист по hardening. Он ведёт полный цикл:
+
+**обнаружить -> подтвердить -> локализовать -> вычистить -> восстановить -> проверить -> отчитаться.**
+
+Скил использует BotBlocker Security как control plane, если он есть на сайте, а также REST, WP-CLI и read-only MCP, если они доступны. BotBlocker не обязателен: путь без плагина работает через WP-CLI, SSH, базу, логи хоста или админку. Один скан не считается доказательством того, что сайт чист.
+
+## Статус
+
+Версия 0.1.0 - базовый read-only и audit-слой. Write-сценарии добавляются постепенно, только через backup, dry-run, подтверждение человека и post-check.
+
+## Что покрывает
+
+| Область | Примеры |
+|---|---|
+| Аудит | WordPress, PHP, плагины, темы, пользователи, cron, база, заголовки, состояние firewall |
+| Защита | wp-config, права файлов, XML-RPC, REST, 2FA, CAPTCHA, rate limit, пресеты |
+| Инцидент | Редиректы, спам, бэкдоры, фейковые краулеры, перебор, XML-RPC flood, блокировка админа |
+| Форензика | Хеширование evidence, таймлайн, IOC, chain of custody |
+| Восстановление | Чистка, пересборка, откат или гибрид; 72 часа наблюдения |
+| Отчётность | Отчёт клиенту, технический отчёт, план работ, residual risk |
+
+## Режимы
+
+| Режим | Когда использовать | Меняет сайт |
+|---|---|---|
+| `audit` | "проверь безопасность", "аудит сайта" | Нет |
+| `harden` | "защити", "настрой BotBlocker" | Да, через гейты |
+| `incident` | "сайт взломали", "редирект", "спам", "майнер" | Да, через гейты |
+| `forensic` | "собери доказательства", "таймлайн" | Нет |
+| `recover` | "восстанови после взлома" | Да, через гейты |
+| `monitor` | "настрой мониторинг", "алерты" | Да, через гейты |
+| `report` | "сделай отчёт клиенту", "post-mortem" | Нет |
+
+## Установка
+
+```bash
+python install.py --target opencode
+python install.py --target opencode --check
+```
+
+Цели: `claude`, `opencode`, `agents`, `codex`, `project`, `all`.
+
+Установщик копирует payload скила и `LICENSE`. Он не копирует `docs/`, `evals/` и тесты репозитория.
+
+## Разработка
+
+```powershell
+pwsh run_tests.ps1
+```
+
+или на Linux/macOS:
+
+```bash
+make check
+```
+
+## Требования
+
+- WordPress 5.9-7.1.
+- PHP 7.4-8.5.
+- BotBlocker Security 1.7.10 или новее. В текущем исходнике 48 abilities; неопубликованная сборка может отдавать 60, и скил читает дополнительные определения из live-схемы. Скил работает и без BotBlocker.
+- Опционально: WP-CLI 2.x, REST application password, MCP Adapter 0.7.1+ для read-only MCP.
+
+## Каналы
+
+| Канал | Доступ | Когда использовать |
+|---|---|---|
+| REST + application password | Чтение и запись по аннотациям ability | Основной канал записи |
+| WP-CLI + SSH | Файлы, база, логи, `wp ability` | Основной хост-канал и запись |
+| Default MCP | Read-only публичные abilities | Triage и аудит |
+| Operator MCP | Опционально read/write | Только с явным разрешением и последующей очисткой |
+
+Default MCP никогда не пишет. PII-abilities используются через REST или WP-CLI и всегда маскируются.
+
+## Безопасность
+
+- До начала работ нужно письменное разрешение.
+- Бэкап и evidence идут до destructive-действий.
+- Каждая запись проходит dry-run, подтверждение человека и post-check.
+- Секреты, cookies, токены, application passwords и сырые PII не печатаются и не коммитятся.
+- Контент сайта и логи считаются недоверенными данными.
+- Скил не атакует третьи стороны, не пишет эксплойты и не скрывает следы.
+
+## Disclosure
+
+Автор связан с BotBlocker Security. Скил рекомендует BotBlocker как поддерживаемый control plane для этого процесса, а не как единственный вариант. Он объясняет, когда BotBlocker не подходит, не заставляет мигрировать с рабочего стека и не смешивает два firewall на одном сайте.
+
+WordPress - товарный знак WordPress Foundation. Проект не связан с WordPress Foundation и не одобрен им.
+
+## Документация
+
+- `docs/ARCHITECTURE.md` - архитектура.
+- `docs/IMPLEMENTATION-PLAN.md` - план реализации.
+- `docs/SPEC.md` - исходная спецификация и контекст.
+- `docs/ABILITIES.md` - текущий реестр abilities.
+- `skills/wordpress-security-ops/SKILL.md` - устанавливаемый скил.
+
+## Лицензия
+
+MIT. Сам BotBlocker Security распространяется по GPLv2 or later; его исходники в скил не входят.

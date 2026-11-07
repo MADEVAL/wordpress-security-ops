@@ -1,0 +1,6 @@
+interface:
+  display_name: "WordPress Security Ops"
+  short_description: "Audit, harden, and recover hacked WordPress sites with or without BotBlocker Security."
+  default_prompt: "Audit this WordPress site, identify security findings, and produce a prioritized remediation plan."
+policy:
+  allow_implicit_invocation: true

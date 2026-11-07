@@ -1,1 +1,35 @@
 /research/plugin
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+*.egg-info/
+
+# Secrets and local state
+.env
+.env.*
+*.local
+auth.json
+*.pem
+*.key
+
+# Evidence, logs and generated artifacts
+evidence/
+artifacts/
+logs/
+*.log
+*.jsonl
+!tests/fixtures/**/*.jsonl
+
+# Archives and local research
+*.zip
+!tests/fixtures/**/*.zip
+
+# OS and IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

@@ -1,0 +1,21 @@
+{
+  "name": "wordpress-security-ops",
+  "displayName": "WordPress Security Ops",
+  "description": "Audit, harden, investigate and repair hacked WordPress sites with or without BotBlocker Security, using REST, WP-CLI, host logs or the admin UI.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Yevhen Leonidov",
+    "url": "https://github.com/MADEVAL"
+  },
+  "homepage": "https://github.com/MADEVAL/wordpress-security-ops",
+  "repository": "https://github.com/MADEVAL/wordpress-security-ops",
+  "license": "MIT",
+  "keywords": [
+    "wordpress",
+    "security",
+    "incident-response",
+    "malware",
+    "botblocker"
+  ],
+  "skills": "./skills/wordpress-security-ops"
+}

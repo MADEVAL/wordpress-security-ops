@@ -1,0 +1,68 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/MADEVAL/wordpress-security-ops/templates/run-manifest.schema.json",
+  "title": "WordPress Security Ops Run Manifest",
+  "type": "object",
+  "required": ["run_id", "mode", "phase", "scope", "access", "started_at", "updated_at"],
+  "properties": {
+    "run_id": { "type": "string" },
+    "mode": {
+      "type": "string",
+      "enum": ["audit", "harden", "incident", "forensic", "recover", "monitor", "report"]
+    },
+    "phase": {
+      "type": "string",
+      "enum": ["assess", "preserve", "plan", "approve", "apply", "verify", "watch", "report"]
+    },
+    "scope": {
+      "type": "object",
+      "required": ["site", "environment", "authorized_by"],
+      "properties": {
+        "site": { "type": "string" },
+        "environment": { "type": "string", "enum": ["production", "staging", "local"] },
+        "multisite": { "type": "boolean" },
+        "authorized_by": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "access": {
+      "type": "object",
+      "required": ["control", "host", "evidence", "pii"],
+      "properties": {
+        "control": { "type": "string", "enum": ["rest", "wpcli", "default-mcp", "operator-mcp", "ui", "none"] },
+        "host": { "type": "string", "enum": ["ssh", "file-access", "panel", "logs-only", "none"] },
+        "evidence": { "type": "string", "enum": ["encrypted-store", "local-only", "none"] },
+        "external": { "type": "string", "enum": ["consented", "not-consented"] },
+        "pii": { "type": "string", "enum": ["masked-ability", "host-logs", "none"] },
+        "write": { "type": "string", "enum": ["rest", "wpcli", "operator", "ui", "none"] }
+      },
+      "additionalProperties": false
+    },
+    "capability_report": {
+      "type": "object",
+      "properties": {
+        "plugin_version": { "type": "string" },
+        "extended": { "type": "boolean" },
+        "addons": { "type": "array", "items": { "type": "string" } },
+        "missing": { "type": "array", "items": { "type": "string" } },
+        "degraded_reasons": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": true
+    },
+    "findings": { "type": "array", "items": { "type": "string" } },
+    "actions": { "type": "array", "items": { "type": "string" } },
+    "artifacts": {
+      "type": "object",
+      "properties": {
+        "findings": { "type": "string" },
+        "timeline": { "type": "string" },
+        "evidence": { "type": "string" },
+        "report": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "started_at": { "type": "string", "format": "date-time" },
+    "updated_at": { "type": "string", "format": "date-time" }
+  },
+  "additionalProperties": false
+}

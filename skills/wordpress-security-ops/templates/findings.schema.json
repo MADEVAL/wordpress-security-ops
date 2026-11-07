@@ -1,0 +1,78 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/MADEVAL/wordpress-security-ops/templates/findings.schema.json",
+  "title": "WordPress Security Ops Findings",
+  "type": "object",
+  "required": ["meta", "findings"],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "required": ["run_id", "site", "mode", "generated_at"],
+      "properties": {
+        "run_id": { "type": "string" },
+        "site": { "type": "string" },
+        "mode": {
+          "type": "string",
+          "enum": ["audit", "harden", "incident", "forensic", "recover", "monitor", "report"]
+        },
+        "generated_at": { "type": "string", "format": "date-time" },
+        "access_profile": { "type": "string" },
+        "plugin_version": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "severity", "confidence", "exposure", "impact", "priority", "status", "source"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^F-[0-9]+$" },
+          "title": { "type": "string", "minLength": 1 },
+          "severity": { "type": "string", "enum": ["critical", "high", "medium", "low", "info"] },
+          "confidence": { "type": "string", "enum": ["confirmed", "likely", "review"] },
+          "exposure": { "type": "string", "enum": ["internet", "auth", "local"] },
+          "impact": {
+            "type": "array",
+            "items": { "type": "string", "enum": ["data", "money", "access", "reputation", "seo", "availability"] },
+            "minItems": 1
+          },
+          "priority": { "type": "string", "enum": ["P0", "P1", "P2", "P3"] },
+          "score": { "type": "integer", "minimum": 1 },
+          "status": { "type": "string", "enum": ["open", "mitigated", "accepted", "false-positive"] },
+          "source": {
+            "type": "object",
+            "required": ["type", "ref"],
+            "properties": {
+              "type": { "type": "string", "enum": ["ability", "wpcli", "file", "db", "log", "external", "manual"] },
+              "ref": { "type": "string" },
+              "version": { "type": "string" }
+            },
+            "additionalProperties": true
+          },
+          "observed_at": { "type": "string", "format": "date-time" },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["id", "sha256", "masked"],
+              "properties": {
+                "id": { "type": "string" },
+                "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+                "masked": { "type": "boolean" }
+              },
+              "additionalProperties": false
+            }
+          },
+          "remediation": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "notes": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,77 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/MADEVAL/wordpress-security-ops/templates/action.schema.json",
+  "title": "WordPress Security Ops Actions",
+  "type": "object",
+  "required": ["plan_id", "site", "actions"],
+  "properties": {
+    "plan_id": { "type": "string" },
+    "site": { "type": "string" },
+    "mode": {
+      "type": "string",
+      "enum": ["audit", "harden", "incident", "forensic", "recover", "monitor", "report"]
+    },
+    "actions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "channel", "risk", "status"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^A-[0-9]+$" },
+          "title": { "type": "string", "minLength": 1 },
+          "ability": { "type": "string" },
+          "channel": {
+            "type": "string",
+            "enum": ["rest", "wpcli", "operator-mcp", "ui", "manual"]
+          },
+          "risk": { "type": "string", "enum": ["manage", "danger"] },
+          "arguments": { "type": "object" },
+          "preconditions": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "dry_run": {
+            "type": "object",
+            "properties": {
+              "required": { "type": "boolean" },
+              "changed": { "type": "boolean" },
+              "applied": { "type": "boolean" },
+              "previous_rule": { "type": ["object", "null"] }
+            },
+            "additionalProperties": true
+          },
+          "approval": {
+            "type": "object",
+            "properties": {
+              "required": { "type": "boolean" },
+              "by": { "type": "string" },
+              "at": { "type": "string", "format": "date-time" },
+              "scope": { "type": "string" }
+            },
+            "additionalProperties": true
+          },
+          "rollback": {
+            "type": "object",
+            "properties": {
+              "ability": { "type": "string" },
+              "arguments": { "type": "object" },
+              "notes": { "type": "string" }
+            },
+            "additionalProperties": true
+          },
+          "post_check": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "status": {
+            "type": "string",
+            "enum": ["planned", "approved", "applied", "failed", "rolled-back"]
+          },
+          "result": { "type": "object" }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

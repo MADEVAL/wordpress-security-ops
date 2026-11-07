@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install PHP
+        run: sudo apt-get update && sudo apt-get install -y php-cli
+
+      - name: Validate skill
+        run: python tests/validate_skill.py
+
+      - name: Run Python tests
+        run: python -m unittest discover -s tests -p "test_*.py"
+
+      - name: Lint PHP
+        run: find skills -name "*.php" -print0 | xargs -0 -r -n1 php -l
+
+      - name: Check shell scripts
+        run: |
+          if command -v shellcheck >/dev/null 2>&1; then
+            find skills -name "*.sh" -print0 | xargs -0 -r -n1 shellcheck
+          else
+            echo "shellcheck not installed; skipping"
+          fi
