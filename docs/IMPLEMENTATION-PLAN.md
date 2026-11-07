@@ -25,7 +25,7 @@ Execution plan for the architecture in `ARCHITECTURE.md`. The plan is ordered as
 | 4 Incident and recovery | Reference done, tooling partial | Playbooks and references written; `parse-botblocker-log.php` not built |
 | 5 Monitoring and reporting | Reference done | Monitoring, blacklist and report references plus templates; no monitor setup run yet |
 | 6 Evals and security review | Partial | 34 unit and behavioral tests, validator and PHP lint pass; eval harness pending |
-| 7 Packaging and release | Partial | Installer, README, manifests and version 0.1.0; release checklist open |
+| 7 Packaging and release | Done | Installer, README, manifests, version 0.1.1, public release v0.1.1 |
 
 ---
 

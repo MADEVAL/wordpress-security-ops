@@ -1,5 +1,3 @@
-/research/plugin
-
 # Python
 __pycache__/
 *.py[cod]
@@ -24,7 +22,7 @@ logs/
 *.jsonl
 !tests/fixtures/**/*.jsonl
 
-# Archives and local research
+# Archives
 *.zip
 !tests/fixtures/**/*.zip
 

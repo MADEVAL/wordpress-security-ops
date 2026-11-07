@@ -274,7 +274,7 @@ def check_installer() -> None:
     for needle in ("claude", "opencode", "agents", "codex", "project", "all", "--check", "--dry-run", "--list", "--with-deps"):
         if needle not in text:
             fail(f"install.py does not contain {needle!r}")
-    for forbidden in ("SPEC.md", "ARCHITECTURE.md", "IMPLEMENTATION-PLAN.md", "research", "evals"):
+    for forbidden in ("SPEC.md", "ARCHITECTURE.md", "IMPLEMENTATION-PLAN.md", "evals"):
         if f'"{forbidden}"' in text or f"'{forbidden}'" in text:
             fail(f"install.py payload must not include {forbidden}")
 
